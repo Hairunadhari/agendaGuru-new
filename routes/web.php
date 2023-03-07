@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\AgendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
+
+Route::resource('agenda', AgendaController::class);
+Route::resource('guru', GuruController::class);
+Route::resource('kelas', KelasController::class);
+?>
