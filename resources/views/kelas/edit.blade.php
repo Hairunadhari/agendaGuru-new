@@ -15,7 +15,12 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Wali Kelas</label>
-          <input type="text" name="walas" value="{{ $data->walas }}" class="form-control">
+          <select class="form-select" name="guru_id" aria-label="Default select example">
+            <option value="{{ $data->guru_id }}">{{ $data->guru->nama }}</option>
+            @foreach ($guru as $g)
+              <option value="{{ $g->id }}">{{ $g->nama }}</option>
+            @endforeach
+          </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

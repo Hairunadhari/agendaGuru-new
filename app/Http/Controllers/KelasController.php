@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('kelas/tambah');
+        $guru = Guru::all();
+        return view('kelas/tambah',compact('guru'));
     }
 
     /**
@@ -31,7 +33,7 @@ class KelasController extends Controller
     {
         $data = new Kelas;
         $data->kelas = $request->kelas;
-        $data->walas = $request->walas;
+        $data->guru_id = $request->guru_id;
        
         $data->save();
         return redirect('kelas')->with('success', 'Data berhasil disimpan.');
@@ -50,8 +52,9 @@ class KelasController extends Controller
      */
     public function edit(string $id)
     {
+        $guru = Guru::all();
         $data = Kelas::findOrFail($id);
-        return view('kelas/edit', compact('data'));
+        return view('kelas/edit', compact('data','guru'));
     }
 
     /**
@@ -61,7 +64,7 @@ class KelasController extends Controller
     {
         $data = Kelas::findorfail($id);
         $data->kelas = $request->kelas;
-        $data->walas = $request->walas;
+        $data->guru_id = $request->guru_id;
       
         $data->save();
 

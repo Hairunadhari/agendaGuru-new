@@ -4,7 +4,7 @@
 <div class="container p-5">
 
   <div class="card ">
-     <a class="btn btn-success m-2" style="width:150px;" href="{{ url('kelas/create') }}">tambah agenda</a>
+     <a class="btn btn-success m-2" style="width:150px;" href="{{ url('kelas/create') }}">Tambah Kelas</a>
           @if(Session::has('success'))
               <p class="alert alert-success text-center">{{ Session::get('success') }}</p>
           @endif
@@ -24,7 +24,7 @@
           <tr >
             <td class="">{{ $no++ }}</td>
             <td>{{ $d->kelas }}</td>
-            <td>{{ $d->walas }}</td>
+            <td>{{ $d->guru->nama }}</td>
             <td>
               <a class="btn btn-primary" href="{{ url('kelas/'.$d->id.'/edit') }}">edit</a>
                 <form action="{{ url('kelas/'.$d->id) }}" method="POST">

@@ -23,13 +23,13 @@
           @foreach ($data as $d)
           <tr>
             <td>{{ $no++ }}</td>
-            <td>{{ $d->namaguru }}</td>
+            <td>{{ $d->guru->nama }}</td>
             <td>{{ $d->matapelajaran}}</td>
             <td>{{ $d->absensi}}</td>
             <td>
               <img src="{{ asset('files/'.$d->dokumentasi) }}" style="width: 80px">
             </td>
-            <td>{{ $d->kelas}}</td>
+            <td>{{ $d->kelas->kelas}}</td>
             <td>
               <a class="btn btn-primary" href="{{ url('agenda/'.$d->id.'/edit') }}">edit</a>
                 <form action="{{ url('agenda/'.$d->id) }}" method="POST">

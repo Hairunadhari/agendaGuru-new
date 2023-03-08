@@ -2,11 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kelas;
+use App\Models\Agenda;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Guru extends Model
 {
-    protected $fillable = ['namaguru', 'matapelajaran', 'kelas', 'absensi','dokumentasi'];
+    protected $fillable = ['nama'];
+    
+    public function agendas()
+    {
+        return $this->hasMany(Agenda::class);
+    }
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class);
+    }
 }
 ?>

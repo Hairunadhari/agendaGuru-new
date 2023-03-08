@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
+use App\Models\Kelas;
 use App\Models\Agenda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -13,7 +15,8 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $data = Agenda::all();
+        $data = Agenda::with('kelas','guru')->get();
+        // dd($data);
         return view('agenda/agenda', compact('data'));
     }
 
@@ -22,7 +25,10 @@ class AgendaController extends Controller
      */
     public function create()
     {
-        return view('agenda/tambah');
+        $kelas = Kelas::all();
+        $guru = Guru::all();
+
+        return view('agenda/tambah',compact('kelas','guru'));
     }
 
     /**
@@ -31,10 +37,10 @@ class AgendaController extends Controller
     public function store(Request $request)
     {
         $data = new Agenda;
-        $data->namaguru = $request->namaguru;
+        $data->guru_id = $request->guru_id;
         $data->matapelajaran = $request->matapelajaran;
         $data->absensi = $request->absensi;
-        $data->kelas = $request->kelas;
+        $data->kelas_id = $request->kelas_id;
         if($request->file('dokumentasi')){
             $file = $request->file('dokumentasi');
 
@@ -61,8 +67,10 @@ class AgendaController extends Controller
      */
     public function edit(string $id)
     {
+        $guru = Guru::all();
+        $kelas = Kelas::all();
         $data = Agenda::findOrFail($id);
-        return view('agenda/edit', compact('data'));
+        return view('agenda/edit', compact('data','kelas','guru'));
     }
 
     /**
@@ -71,10 +79,10 @@ class AgendaController extends Controller
     public function update(Request $request, string $id)
     {
         $data = Agenda::findorfail($id);
-        $data->namaguru = $request->namaguru;
+        $data->guru_id = $request->guru_id;
         $data->matapelajaran = $request->matapelajaran;
         $data->absensi = $request->absensi;
-        $data->kelas = $request->kelas;
+        $data->kelas_id = $request->kelas_id;
         if($request->file('dokumentasi')){
             $file = $request->file('dokumentasi');
 

@@ -11,7 +11,12 @@
         
         <div class="mb-3">
           <label class="form-label">Nama Guru</label>
-          <input type="text" name="namaguru" value="{{ $data->namaguru }}" class="form-control">
+          <select class="form-select" name="guru_id" aria-label="Default select example">
+            <option value="{{ $data->guru_id }}">{{ $data->guru->nama }}</option>
+            @foreach ($guru as $g)
+              <option value="{{ $g->id }}">{{ $g->nama }}</option>
+            @endforeach
+          </select>
           
         </div>
         <div class="mb-3">
@@ -31,7 +36,12 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Kelas</label>
-          <input type="text" name="kelas" value="{{ $data->kelas }}" class="form-control">
+          <select class="form-select" name="kelas_id" aria-label="Default select example">
+            <option value="{{ $data->kelas_id }}">{{ $data->kelas->kelas }}</option>
+            @foreach ($kelas as $g)
+              <option value="{{ $g->id }}">{{ $g->kelas }}</option>
+            @endforeach
+          </select>
           
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
