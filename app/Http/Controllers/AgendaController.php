@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AgendaController extends Controller
 {
@@ -33,11 +34,18 @@ class AgendaController extends Controller
         $data->namaguru = $request->namaguru;
         $data->matapelajaran = $request->matapelajaran;
         $data->absensi = $request->absensi;
-        $data->dokumentasi = $request->dokumentasi;
         $data->kelas = $request->kelas;
+        if($request->file('dokumentasi')){
+            $file = $request->file('dokumentasi');
+
+            $filename = time().str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('files', $filename);
+            $data->dokumentasi = $filename;  
+        }
         // dd($data);
+       
         $data->save();
-        return redirect('agenda');
+        return redirect('agenda')->with('success', 'Data berhasil disimpan.');
     }
 
     /**
@@ -66,10 +74,18 @@ class AgendaController extends Controller
         $data->namaguru = $request->namaguru;
         $data->matapelajaran = $request->matapelajaran;
         $data->absensi = $request->absensi;
-        $data->dokumentasi = $request->dokumentasi;
         $data->kelas = $request->kelas;
+        if($request->file('dokumentasi')){
+            $file = $request->file('dokumentasi');
 
-       
+            $filename = time().str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('files', $filename);
+
+            File::delete('files', $data->dokumentasi);
+
+            $data->dokumentasi = $filename;  
+        }
+        // dd($data);
         $data->save();
 
         return redirect('agenda')->with('success', 'data berhasil diupdate');

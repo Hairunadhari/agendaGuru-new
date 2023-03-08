@@ -55,13 +55,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ url('guru') }}">
                                 <span data-feather="users"></span>
                                 Guru
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ url('kelas') }}">
                                 <span data-feather="users"></span>
                                 Kelas
                             </a>

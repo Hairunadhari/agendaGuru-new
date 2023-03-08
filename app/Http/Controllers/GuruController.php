@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -11,7 +12,8 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        $data = Guru::all();
+        return view('guru/guru', compact('data'));
     }
 
     /**

@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Dokumentasi</label>
-          <input type="text" name="dokumentasi" value="{{ $data->dokumentasi }}" class="form-control">
+          <input type="file" name="dokumentasi" value="{{ $data->dokumentasi }}" class="form-control">
           
         </div>
         <div class="mb-3">
