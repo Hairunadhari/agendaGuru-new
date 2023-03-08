@@ -21,7 +21,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view('guru/tambah');
     }
 
     /**
@@ -29,7 +29,11 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Guru;
+        $data->nama = $request->nama;
+       
+        $data->save();
+        return redirect('guru')->with('success', 'Data berhasil disimpan.');
     }
 
     /**
@@ -45,7 +49,8 @@ class GuruController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Guru::findOrFail($id);
+        return view('Guru/edit', compact('data'));
     }
 
     /**
@@ -53,7 +58,12 @@ class GuruController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Guru::findorfail($id);
+        $data->nama = $request->nama;
+      
+        $data->save();
+
+        return redirect('guru')->with('success', 'data berhasil diupdate');
     }
 
     /**
@@ -61,6 +71,9 @@ class GuruController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Guru::findorfail($id);
+        $data->delete();
+
+        return redirect('guru')->with('success', 'data berhasil didelete');
     }
 }

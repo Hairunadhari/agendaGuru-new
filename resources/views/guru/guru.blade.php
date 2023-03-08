@@ -2,34 +2,41 @@
 
 @section('content')
 <div class="container p-5">
-    <table class="table">
-        <thead>
+
+  <div class="card ">
+     <a class="btn btn-success m-2" style="width:150px;" href="{{ url('guru/create') }}">tambah agenda</a>
+          @if(Session::has('success'))
+              <p class="alert alert-success text-center">{{ Session::get('success') }}</p>
+          @endif
+    <div class="card-body">
+      <table class="table ">
+        <thead >
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="">No</th>
+            <th scope="col">Nama Guru</th>
+            <th scope="col">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+          <?php $no = 1?>
+          @foreach ($data as $d)
+          <tr >
+            <td class="">{{ $no++ }}</td>
+            <td>{{ $d->nama }}</td>
+            <td>
+              <a class="btn btn-primary" href="{{ url('guru/'.$d->id.'/edit') }}">edit</a>
+                <form action="{{ url('guru/'.$d->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger" type="submit">hapus</button>
+                </form>
+            </td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          @endforeach
+        
         </tbody>
       </table>
+    </div>
+   </div>
 </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -11,7 +12,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        $data = Kelas::all();
+        return view('kelas/kelas', compact('data'));
     }
 
     /**
@@ -19,7 +21,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('kelas/tambah');
     }
 
     /**
@@ -27,7 +29,12 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Kelas;
+        $data->kelas = $request->kelas;
+        $data->walas = $request->walas;
+       
+        $data->save();
+        return redirect('kelas')->with('success', 'Data berhasil disimpan.');
     }
 
     /**
@@ -43,7 +50,8 @@ class KelasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Kelas::findOrFail($id);
+        return view('kelas/edit', compact('data'));
     }
 
     /**
@@ -51,7 +59,13 @@ class KelasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Kelas::findorfail($id);
+        $data->kelas = $request->kelas;
+        $data->walas = $request->walas;
+      
+        $data->save();
+
+        return redirect('kelas')->with('success', 'data berhasil diupdate');
     }
 
     /**
@@ -59,6 +73,9 @@ class KelasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Kelas::findorfail($id);
+        $data->delete();
+
+        return redirect('kelas')->with('success', 'data berhasil didelete');
     }
 }
