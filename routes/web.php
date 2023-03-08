@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AgendaController;
@@ -17,10 +18,23 @@ use App\Http\Controllers\AgendaController;
 */
 
 Route::get('/', function () {
+    return view('auth/login');
+});
+Route::get('/dashboard', function () {
     return view('dashboard');
 });
+Route::get('/login', function () {
+    return view('auth/login');
+});
+Route::get('/register', function () {
+    return view('auth/register');
+});
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::resource('agenda', AgendaController::class);
 Route::resource('guru', GuruController::class);
 Route::resource('kelas', KelasController::class);
 ?>
+

@@ -4,7 +4,9 @@
 <div class="container p-5">
 
   <div class="card ">
-     <a class="btn btn-success m-2" style="width:150px;" href="{{ url('guru/create') }}">Tambah Guru</a>
+    @auth
+    <a class="btn btn-success m-2" style="width:150px;" href="{{ url('guru/create') }}">Tambah Guru</a>
+    @endauth
           @if(Session::has('success'))
               <p class="alert alert-success text-center">{{ Session::get('success') }}</p>
           @endif
